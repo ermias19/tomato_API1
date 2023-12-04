@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-q4n8oqvcx1u64ju2im4pejlkg$9ja!+yq7lffsyf!w^6hkizqt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'tomato.com']
 
 # its temp configuration delete it when its needed
 # APPEND_SLASH = False
