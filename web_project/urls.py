@@ -16,7 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from tomato import views
+from tomato.tomato_views.recipe_view import Recipe_view , Recipe_detail_view ,recipt_ing_recipt 
+from tomato.tomato_views.ingredient_view import Ingredient_view , Ingredient_detail_view ,ingred_resto_recipt
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # resturant starts here
+    path('restorant/', views.Restourant_view.as_view(), name='restaurant-list-create'), 
+    path('restorant/<int:pk>', views.Restorant_detail_view.as_view(), name='restaurant-detail'),
+    path('restorant/<int:restaurant_id>/recipes', views.restorant_spec_recipt.as_view(), name='restaurant-recipe-detail'),
+    # recipes starts below
+     path('recipes', Recipe_view.as_view(), name='restaurant-recipe-detail'), 
+     path('recipes/<int:pk>', Recipe_detail_view.as_view(), name='restaurant-detail'),
+     path('recipes/recipes_ingredient/<int:recipe_id>', recipt_ing_recipt.as_view(), name='recipe-ingredient-detail'),
+     path('recipes/recipes_ingredient/', recipt_ing_recipt.as_view(), name='recipe-ingredient-detail'),
+    #  path('recipes/<int:Recipe_id>/<int:ingredient_id>', recipt_ing_recipt.as_view(), name='restaurant-detail'),
+    #  ingredient starts below
+    path('ingredient', Ingredient_view.as_view(), name='restaurant-recipe-detail'), 
+    path('ingredient/<int:pk>', Ingredient_detail_view.as_view(), name='restaurant-detail'),
+    path('ingredient/ingredient_resturant/<int:ingred_id>', ingred_resto_recipt.as_view(), name='recipe-ingredient-detail'),
+    path('ingredient/ingredient_resturant/', ingred_resto_recipt.as_view(), name='recipe-ingredient-detail'),
+    
+
 ]
