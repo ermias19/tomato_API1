@@ -8,15 +8,15 @@ from ..serializers import  Recipe_Serializer  ,RecipeIngredient_Serializer
 
 class Recipe_view(generics.ListCreateAPIView):
     queryset=Recipe.objects.all()
-    print(queryset)
+    # print(queryset)
     serializer_class=Recipe_Serializer
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        print(request.data)
+        # print(request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        print('yihe mndn nw',serializer.data)
+        # print('yihe mndn nw',serializer.data)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
@@ -49,10 +49,10 @@ class recipt_ing_recipt(generics.ListCreateAPIView):
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        print(request.data)
+        # print(request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        print(serializer.data)
+        # print(serializer.data)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     

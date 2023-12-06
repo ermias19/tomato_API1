@@ -9,15 +9,15 @@ from rest_framework import status
 
 class Restourant_view(generics.ListCreateAPIView):
     queryset=Restourant.objects.all()
-    print(queryset)
+    # print(queryset)
     serializer_class=Restourant_Serializer
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        print(request.data)
+        # print(request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        print(serializer.data)
+        # print(serializer.data)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
@@ -35,7 +35,7 @@ class restorant_spec_recipt(generics.ListAPIView):
     serializer_class=Recipe_Serializer
     def get_queryset(self,*args, **kwargs ):
         restaurant_id=self.kwargs.get('restaurant_id')
-        print(restaurant_id)
+        # print(restaurant_id)
         queryset=Recipe.objects.filter(Restourant=restaurant_id)
         return queryset
     
