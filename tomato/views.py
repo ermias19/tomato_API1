@@ -9,15 +9,15 @@ from rest_framework import status
 
 class Restourant_view(generics.ListCreateAPIView):
     queryset=Restourant.objects.all()
-    # print(queryset)
+   
     serializer_class=Restourant_Serializer
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        # print(request.data)
+       
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        # print(serializer.data)
+        
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
@@ -35,24 +35,58 @@ class restorant_spec_recipt(generics.ListAPIView):
     serializer_class=Recipe_Serializer
     def get_queryset(self,*args, **kwargs ):
         restaurant_id=self.kwargs.get('restaurant_id')
-        # print(restaurant_id)
+     
         queryset=Recipe.objects.filter(Restourant=restaurant_id)
         return queryset
     
 
+"""             Django Views Documentation
+
+1. Restourant_view Class
+    Description: Provides API endpoints for creating and listing restaurants.
+
+    Methods:
+    GET: Lists all restaurants.
+    POST: Creates a new restaurant.
+    Request Parameters:
+    GET: No parameters required.
+    POST: Expects restaurant data in the request body.
+    Response:
+    GET: Returns a list of serialized restaurants.
+    POST: Returns the serialized data of the created restaurant.
+2. Restorant_detail_view Class
+    Description: Provides API endpoints for retrieving, updating, and deleting a specific restaurant.
+
+    Methods:
+    GET: Retrieves details of a specific restaurant.
+    PUT / PATCH: Updates details of a specific restaurant.
+    DELETE: Deletes a specific restaurant.
+    Request Parameters:
+    Expects the primary key (pk) of the restaurant in the URL.
+    Response:
+    GET: Returns the serialized data of the requested restaurant.
+    PUT / PATCH: Returns the updated serialized data of the restaurant.
+    DELETE: Returns a success message.
+3. restorant_spec_recipt Class
+        Description: Provides API endpoint for listing recipes associated with a specific restaurant.
+
+        Methods:
+        GET: Lists all recipes associated with a specific restaurant.
+        Request Parameters:
+        Expects the restaurant_id in the URL.
+        Response:
+        Returns a list of serialized recipes associated with the specified restaurant.
+        Additional Notes:
+        Serializer Classes:
+
+        The views use serializer classes (Restourant_Serializer and Recipe_Serializer) to handle data serialization and deserialization.
+    Error Handling:
+
+    The views include error handling to validate incoming data and respond with appropriate status codes and error messages.
+    HTTP Methods:
+
+    The views utilize various HTTP methods (GET, POST, PUT, PATCH, DELETE) to perform different operations on the resources."""
 
 
-# @api_view(['GET', 'POST'])
-# def Restourant_view(request):
-#     if request.method=='GET':
-#         reto=Restourant.objects.all()
-#         resto_serializer=Restourant_Serializer(reto, many=True)
-#         return JsonResponse({'retro':resto_serializer.data})
-#     if request.method=='POST':
-#         serializer=Recipe_Serializer(data=request.data)
-#         if serializer.isvalid():
-#             serializer.save()
-       
-#         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
 

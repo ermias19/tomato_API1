@@ -8,7 +8,7 @@ from ..serializers import  Recipe_Serializer  ,RecipeIngredient_Serializer
 
 class Recipe_view(generics.ListCreateAPIView):
     queryset=Recipe.objects.all()
-    # print(queryset)
+  
     serializer_class=Recipe_Serializer
     
     def create(self, request, *args, **kwargs):
@@ -16,7 +16,7 @@ class Recipe_view(generics.ListCreateAPIView):
         # print(request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        # print('yihe mndn nw',serializer.data)
+    
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
@@ -49,19 +49,60 @@ class recipt_ing_recipt(generics.ListCreateAPIView):
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        # print(request.data)
+ 
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        # print(serializer.data)
+ 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
+
     
-    # def get_queryset(self):
-    #     Recipe_id=self.kwargs.get('Recipe_id')
-    #     ingredient_id=self.kwargs.get('ingredient_id')
-    #     print(Recipe_id)
-    #     queryset=RecipeIngredient.objects.filter(recipe=Recipe_id  and Ingredient=ingredient_id)
-    #     print(queryset)
-    #     return queryset    
-    
+"""Django Views Documentation
+1. Recipe_view Class
+    Description: Provides API endpoints for creating and listing recipes.
+
+    Methods:
+    GET: Lists all recipes.
+    POST: Creates a new recipe.
+    Request Parameters:
+    GET: No parameters required.
+    POST: Expects recipe data in the request body.
+    Response:
+    GET: Returns a list of serialized recipes.
+    POST: Returns the serialized data of the created recipe.
+2. Recipe_detail_view Class
+    Description: Provides API endpoints for retrieving, updating, and deleting a specific recipe.
+
+    Methods:
+    GET: Retrieves details of a specific recipe.
+    PUT / PATCH: Updates details of a specific recipe.
+    DELETE: Deletes a specific recipe.
+    Request Parameters:
+    Expects the primary key (pk) of the recipe in the URL.
+    Response:
+    GET: Returns the serialized data of the requested recipe.
+    PUT / PATCH: Returns the updated serialized data of the recipe.
+    DELETE: Returns a success message.
+3. recipt_ing_recipt Class
+    Description: Provides API endpoints for creating and listing recipe-ingredient relationships based on a specific recipe.
+
+    Methods:
+    GET: Lists all recipe-ingredient relationships based on a specific recipe.
+    POST: Creates a new recipe-ingredient relationship.
+    Request Parameters:
+    GET: Expects the recipe_id in the URL.
+    POST: Expects recipe-ingredient relationship data in the request body.
+    Response:
+    GET: Returns a list of serialized recipe-ingredient relationships based on the specified recipe.
+    POST: Returns the serialized data of the created recipe-ingredient relationship.
+    Additional Notes:
+    Serializer Classes:
+
+    The views use serializer classes (Recipe_Serializer and RecipeIngredient_Serializer) to handle data serialization and deserialization.
+    Error Handling:
+
+    The views include error handling to validate incoming data and respond with appropriate status codes and error messages.
+    HTTP Methods:
+
+    The views utilize various HTTP methods (GET, POST, PUT, PATCH, DELETE) to perform different operations on the resources."""
