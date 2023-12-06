@@ -131,4 +131,4 @@ GET: recupera i dettagli di un ristorante specifico.
 METTI/PATCH: Aggiorna i dettagli di un ristorante specifico.
 ELIMINA: elimina un ristorante specifico.
 3. restauro
-#####################################english version is included in the specific .py files######################################################33 
+################english version is included in the specific .py files###################
